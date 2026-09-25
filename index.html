@@ -2,8 +2,8 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>سیستم حقوق و دستمزد چندشرکتی | پنل مدیریت</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>سیستم حقوق و دستمزد</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
@@ -16,70 +16,124 @@
       --danger: #ef4444;
       --success: #10b981;
     }
-    * { box-sizing: border-box; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Tahoma, sans-serif; margin: 0; padding: 0; }
-    body { background-color: var(--bg); color: var(--text); min-height: 100vh; }
+    * { box-sizing: border-box; font-family: system-ui, -apple-system, Tahoma, sans-serif; margin: 0; padding: 0; }
+    html, body { width: 100%; min-height: 100vh; background-color: var(--bg); color: var(--text); }
     
     #login-page {
-      display: flex; justify-content: center; align-items: center; min-height: 100vh;
-      background: linear-gradient(135deg, #005a4a 0%, #007a64 100%); padding: 15px;
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      width: 100%;
+      background: linear-gradient(135deg, #005a4a 0%, #007a64 100%);
+      padding: 20px;
     }
     .login-card {
-      background: var(--card-bg); width: 100%; max-width: 400px; border-radius: 20px;
-      padding: 35px 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); text-align: center;
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 380px;
+      border-radius: 16px;
+      padding: 30px 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      text-align: center;
     }
     .login-icon {
-      background: var(--primary); color: white; width: 55px; height: 55px;
-      border-radius: 12px; display: inline-flex; align-items: center; justify-content: center;
-      font-size: 24px; margin-bottom: 15px;
+      background: var(--primary);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 12px;
     }
-    .form-group { text-align: right; margin-bottom: 18px; }
-    .form-group label { display: block; font-size: 13px; margin-bottom: 6px; color: #666; }
+    .form-group { text-align: right; margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; margin-bottom: 6px; color: #555; }
     .form-control {
-      width: 100%; padding: 10px 14px; border: 1px solid var(--border);
-      border-radius: 10px; font-size: 14px; outline: none; transition: 0.2s;
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
     }
-    .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,122,100,0.15); }
+    .form-control:focus { border-color: var(--primary); }
     .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 10px 16px; border: none; border-radius: 10px;
-      font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
     }
-    .btn-primary { background: var(--primary); color: white; width: 100%; }
+    .btn-primary { background: var(--primary); color: white; }
     .btn-primary:hover { background: var(--primary-hover); }
-    .btn-outline { background: white; border: 1px solid var(--primary); color: var(--primary); width: 100%; }
-    .btn-outline:hover { background: #f0fdf9; }
+    .btn-outline { background: white; border: 1px solid var(--primary); color: var(--primary); }
 
-    #dashboard-page { display: none; }
+    #dashboard-page { display: none; width: 100%; min-height: 100vh; }
     header {
-      background: white; border-bottom: 1px solid var(--border); padding: 10px 20px;
-      display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 20;
-      flex-wrap: wrap; gap: 10px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      flex-wrap: wrap;
+      gap: 10px;
     }
-    .header-right { display: flex; align-items: center; gap: 12px; }
-    .header-left { display: flex; align-items: center; gap: 12px; }
-    .badge-date { background: #e6f4f1; color: var(--primary); padding: 6px 12px; border-radius: 8px; font-size: 12px; }
-
-    /* انتخابگر شرکت */
+    .header-right, .header-left { display: flex; align-items: center; gap: 8px; }
     .company-selector-box {
-      display: flex; align-items: center; gap: 6px; background: #f8fafc;
-      padding: 4px 8px; border-radius: 10px; border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #f8fafc;
+      padding: 5px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
     }
     .company-selector-box select {
-      border: none; background: transparent; font-size: 13px; font-weight: bold;
-      color: var(--primary); outline: none; cursor: pointer;
+      border: none;
+      background: transparent;
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--primary);
+      outline: none;
     }
-
     .sidebar {
-      position: fixed; top: 0; right: -280px; width: 280px; height: 100vh;
-      background: #1e293b; color: white; transition: 0.3s; z-index: 100; padding: 20px 15px;
+      position: fixed;
+      top: 0;
+      right: -280px;
+      width: 280px;
+      height: 100vh;
+      background: #1e293b;
+      color: white;
+      transition: 0.3s;
+      z-index: 100;
+      padding: 20px 15px;
     }
     .sidebar.active { right: 0; }
     .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
     .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 8px; }
     .sidebar-menu li a {
-      color: #cbd5e1; text-decoration: none; padding: 12px; border-radius: 8px;
-      display: flex; align-items: center; gap: 10px; font-size: 14px; transition: 0.2s;
+      color: #cbd5e1;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
     }
-    .sidebar-menu li.active a, .sidebar-menu li a:hover { background: var(--primary); color: white; }
+    .sidebar-menu li.active a { background: var(--primary); color: white; }
 
-    .container { max-width: 1200px; margin: 20px auto; padding: 0
+    .container { width: 100%; max-width: 1200px; mar
